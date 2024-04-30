@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+    {% csrf_token %}
+
+    <div class="main-section">
+		{% if userprofile.cover_photo %}
+			<div class="page-section restaurant-detail-image-section" style=" background: url({{userprofile.cover_photo.url}}) no-repeat scroll 0 0 / cover;">
+		{% else %}
+			<div class="page-section restaurant-detail-image-section" style=" background: url({% static 'images/foodcover.jpg' %}) no-repeat scroll 0 0 / cover;">
+		{% endif %}
+			
+				<!-- Container Start -->
+				<div class="container">
+					<!-- Row Start -->
+					<div class="row">
+						<!-- Column Start -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="company-info-detail">
+								<div class="company-info">
+									<div class="img-holder">
+										<figure>
+											{% if userprofile.Profile_picture %}
+												<img src="{{ userprofile.Profile_picture.url}}" alt="no img">
+											{% else %}
+												<img src="https://banner2.cleanpng.com/20180329/zue/kisspng-computer-icons-user-profile-person-5abd85306ff7f7.0592226715223698404586.jpg" alt="no img">
+											{% endif %}
+											
+										</figure>
+									</div>
+									
+									<!-- Vendor data -->
+									<div class="text-holder">
+										<span class="restaurant-title">{{vendor.Restaurant_name}}</span>
+										<div class="text">
+											<i class="icon-location"></i>
+											<p>{{ userprofile.city }} , {{ userprofile.state }}</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Column End -->
+					</div>
+					<!-- Row End -->
+				</div>
+				<!-- Container End -->
+			</div>
+			<div class="page-section account-header buyer-logged-in">
+				<div class="container">
+					<div class="row">
+
+						<!-- Vendor SideBar start  -->
+						{% include "includes/vendorsidebar.html" %}
+						<!-- Vendor SideBar end  -->
+
+						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<div class="user-dashboard loader-holder">		
+								<div class="user-holder">
+									
+									<div class="row">
+										<div class="element-title has-border right-filters-row">
+											<h5>All {{ category.category_name }} Food Items</h5>
+										</div>
+									</div>
+									
+									{% for food in food_item %}
+									<div class="card mb-3" style="max-width: 570px;height:100px">
+										<div class="listing ">
+										<div class="row g-0">
+										  <div class="col-md-3 flex-fill height:100px">
+											<div class="img-holder">
+												<div class="list-post featured">
+												<figure><img src="{{ food.images.url }}" class="img-fluid rounded-start" style="height:100px" alt=""></figure>
+												{% if food.is_available %}
+												<span class="restaurant-status open">
+													<em class="bookmarkRibbon"></em>Available
+												</span>
+												{% else %}
+												{% endif %}
+											</div>
+										</div>										
+										  </div>
+										  <div class="col-md-9">
+											<div class="card-body pb-0 pt-2 pr-1 pl-3">
+											  <div class="d-flex justify-content-between">
+												<h5 class="card-title mb-0 " >{{ food.food_name }}</h5>
+												<div class="mr-2" style="height: 25px;width:50px;font-size: 18px;">
+													<a href="" class="text-decoration-none text-black"><i class="icon-edit2 mr-1"></i></a>
+													<a href="" class="text-decoration-none text-danger"><i class="icon-delete"></i></a>
+												</div>
+											  </div>
+											  <p class="card-text mb-0">Rs.{{ food.price }}</p>
+											  <p class="card-text text-truncate"><small>{{ food.description }}</small></p>
+											</div>
+										  </div>
+										</div>
+									</div>
+									</div>
+									  {% endfor %}
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+    
+{% endblock %}
