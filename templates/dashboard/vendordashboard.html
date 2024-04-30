@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+    {% csrf_token %}
+
+    <div class="main-section">
+		{% if userprofile.cover_photo %}
+			<div class="page-section restaurant-detail-image-section" style=" background: url({{userprofile.cover_photo.url}}) no-repeat scroll 0 0 / cover;">
+		{% else %}
+			<div class="page-section restaurant-detail-image-section" style=" background: url({% static 'images/foodcover.jpg' %}) no-repeat scroll 0 0 / cover;">
+		{% endif %}
+			
+				<!-- Container Start -->
+				<div class="container">
+					<!-- Row Start -->
+					<div class="row">
+						<!-- Column Start -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="company-info-detail">
+								<div class="company-info">
+									<div class="img-holder">
+										<figure>
+											{% if userprofile.Profile_picture %}
+												<img src="{{ userprofile.Profile_picture.url}}" alt="no img">
+											{% else %}
+												<img src="https://banner2.cleanpng.com/20180329/zue/kisspng-computer-icons-user-profile-person-5abd85306ff7f7.0592226715223698404586.jpg" alt="no img">
+											{% endif %}
+											
+										</figure>
+									</div>
+									
+									<!-- Vendor data -->
+									<div class="text-holder">
+										<span class="restaurant-title">{{vendor.Restaurant_name}}</span>
+										<div class="text">
+											<i class="icon-location"></i>
+											<p>{{ userprofile.city }} , {{ userprofile.state }}</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- Column End -->
+					</div>
+					<!-- Row End -->
+				</div>
+				<!-- Container End -->
+			</div>
+			<div class="page-section account-header buyer-logged-in">
+				<div class="container">
+					<div class="row">
+
+						<!-- Vendor SideBar start  -->
+						{% include "includes/vendorsidebar.html" %}
+						<!-- Vendor SideBar end  -->
+
+						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+							<!-- 3 cards start  -->
+							<div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+								<div class="col">
+									<div class="card">
+									  <div class="card-body">
+										<h5 class="card-title text-center fs-5 ">Total Orders</h5>
+										<p class="card-text fs-5 text-center">150</p>
+									  </div>
+									</div>
+								  </div>
+								<div class="col">
+								  <div class="card">
+									<div class="card-body">
+									  <h5 class="card-title text-center fs-5 ">Delivered Orders</h5>
+									  <p class="card-text fs-5 text-center">100</p>
+									</div>
+								  </div>
+								</div>
+								<div class="col">
+								  <div class="card">
+									<div class="card-body">
+									  <h5 class="card-title text-center fs-5 ">Pending Orders</h5>
+									  <p class="card-text fs-5 text-center">50</p>
+									</div>
+								  </div>
+								</div>
+							  </div>
+							<!--  3 cards end -->
+							
+							
+							<div class="user-dashboard loader-holder">
+								<div class="user-holder">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="row">
+											<div class="element-title has-border right-filters-row">
+												<h5>Recent Orders</h5>
+												<div class="right-filters row pull-right">
+													<div class="col-lg-6 col-md-6 col-xs-6">
+														<div class="input-field">
+															<select class="chosen-select-no-single">
+																<option selected="selected" value="">Select Orders Status</option>
+																<option value="Processing">Processing</option>
+																<option value="Cancelled">Cancelled</option>
+																<option value="Completed">Completed</option>
+															</select>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="user-orders-list">
+												<div class="responsive-table">
+													<ul class="table-generic">
+														<li class="order-heading-titles">
+															<div>Order id</div>
+															<div>Date</div>
+															<div>Total Price</div>
+															<div>Charges</div>
+															<div>Received</div>
+															<div>Status</div>
+														</li>
+														<li class="order-heading-titles">
+															<div><a href="#" data-toggle="modal" data-target="#order-det-22606">order-12345</a></div>
+															<div>Mar 10,2024</div>
+															<div>Rs 175.00</div>
+															<div>Rs 15.00</div>
+															<div>Rs 160.00</div>
+															<div><span class="order-status" style="background-color: #047a06;">Completed</span></div>
+														</li>
+														
+														
+														
+									
+													</ul>
+
+												</div>												
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+    
+{% endblock %}

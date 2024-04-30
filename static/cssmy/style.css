@@ -1,0 +1,63 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    scroll-behavior: smooth;
+}
+.blur{
+    height: 60px;
+    width: 100%;
+    background-image: url('https://media.istockphoto.com/id/1182393436/vector/fast-food-seamless-pattern-with-vector-line-icons-of-hamburger-pizza-hot-dog-beverage.jpg?s=612x612&w=0&k=20&c=jlj-n_CNsrd13tkHwC7MVo0cGUyyc8YP6wJQdCvMUGw=');
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+.nav-bar{
+    height: 60px;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    background-color: transparent;
+    justify-content: space-between;
+    align-items: center;
+}
+.web-name{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+.title{
+    width: 20%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    
+}
+.sub-title{
+    width: 90px;
+    /* background-color:greenyellow; */
+}
+.sub-title h3 {
+    padding:3px 15px;
+    /* background-color: red; */
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.web-name h2{
+    /* background-color: white; */
+    padding: 5px 10px;
+    border-radius: 15px;
+}
