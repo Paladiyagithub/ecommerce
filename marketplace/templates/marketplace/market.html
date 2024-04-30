@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="main-section">
+        <div class="container">
+          <br>
+          <div class="d-flex justify-content-center">
+            <form class="d-flex justify-content-center w-50" method="GET">
+                {% csrf_token %}
+                <div style="width: 500px;display: flex;">
+                  <input class="form-control" type="search" name="S" placeholder="Search Your Restaurant" aria-label="Search" style="border-top-right-radius: 0px;border-bottom-right-radius:0px;border: none;">
+                  <button type="submit" style="background-color: white;border: none;width:40px ;"><i class='bx bx-search-alt-2' style="font-size: 30px;margin-top: 5px;"></i></button>
+                </div>
+            </form>
+          </div>
+          <div class="jumbotron">
+            <h1>{{ count }} Active Restaurants</h1>
+            <br>
+              {% for ven_data in vendor %}
+                  <div class="card mb-3" style="max-width: 570px;height:100px">
+                    <div class="row g-0">
+                      <div class="col-md-3 flex-fill height:100px">
+                        {% for user_data in ven_profile %}
+                          {% if ven_data.user == user_data.user %}
+                            {% if user_data.Profile_picture %}
+                              <img src="{{ user_data.Profile_picture.url }}" class="img-fluid rounded-start" style="height:100px" alt="">
+                            {% else %}
+                              <img src="{{ user_data.Profile_picture.url }}" class="img-fluid rounded-start" style="height:100px" alt="">
+                            {% endif %}
+                        </div>
+                      <div class="col-md-9">
+                        <div class="card-body pb-0 pt-2 pr-1 pl-3">
+                          <h5 class="card-title mb-0" >{{ ven_data.Restaurant_name }}</h5>
+                          <p class="card-text mb-0">{{ user_data.state }}, {{user_data.city}}, {{user_data.pin_code}}</p>
+  
+                          <div class="row ">
+                            <div class="col-lg-12 col-md-7 col-sm-12 col-xs-10">
+                                    <div class="payment-holder d-flex flex-row-reverse mr-3">
+                                        <a href="{% url "restaurantmenu" slug=ven_data.slug %}">
+                                            <input type="submit" value="View Menu"
+                                            id="btn-next-restaurant-information"
+                                            class="bgcolor mt-1" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          {% endif %}
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              {% endfor %}
+
+
+              
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+

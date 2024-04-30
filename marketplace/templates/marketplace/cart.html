@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+<div class="main-section">
+	{% if userprofile.cover_photo %}
+		<div class="page-section restaurant-detail-image-section" style=" background: url({{userprofile.cover_photo.url}}) no-repeat scroll 0 0 / cover;">
+	{% else %}
+		<div class="page-section restaurant-detail-image-section" style=" background: url({% static 'images\default_cover.jpg'%}) no-repeat scroll 0 0 / cover;">
+	{% endif %}
+	<!-- Container Start -->
+	<div class="container">
+		<!-- Row Start -->
+		<div class="row">
+			<!-- Column Start -->
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="company-info-detail">
+					<div class="company-info">
+						<div class="img-holder">
+							<figure>
+								{% if userprofile.Profile_picture %}
+								<img src="{{ userprofile.Profile_picture.url }}" alt="no img">
+								{% else %}
+								<img src="{% static 'images/default_user.jpeg' %}" alt="">
+								{% endif %}
+							
+							</figure>
+						</div>
+						<div class="text-holder">
+							<span class="restaurant-title">{{ vendor.Restaurant_name}}</span>
+							<div class="text">
+								<i class="icon-location"></i>
+								<p>{{userprofile.address}}, {{userprofile.city}} - {{userprofile.pin_code}}.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Column End -->
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container End -->
+	</div>
+</div>
+
+<!-- displaying cart items -->
+<div class="container" style="background-color: white;"><br>
+    {% for item in cart_items %}
+    <div class="card mb-3 w-50" >
+        <div class="row g-0">
+          <div class="col-md-3">
+            <img src="{{ item.food_item.images.url }}" class="" alt="..." height="110px" width="140px" style="border-radius: 5px;"> 
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ">
+              <table class="table table-borderless">
+                <tr>
+                    <th>Food Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td>{{ item.food_item }}</td>
+                    <td>{{ item.quantity}}</td>
+                    <td>{{ item.total }}</td>
+
+                </tr>
+                
+                
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="card card-body w-50">
+        <table >
+            <tr>
+                <th>Price Details</th>
+            </tr>
+            <tr class="w-25">
+                <td style="width: 200px;">CGST<i class='bx bx-info-circle'></i></td>
+                <td>6%</td>
+                <td  style="margin-top: 0px;">{{gst}}</td>
+            </tr>
+            <tr class="w-25">
+                <td style="width: 200px;">SGST<i class='bx bx-info-circle'></i></td>
+                <td style="width: 100px;">6%</td>
+                <td>{{gst}}</td>
+            </tr>
+            <tr style="width: 100px;">
+                <td colspan="2" style="width: 100px;">Delivery Charge</td>
+                <td >{% if delivery_fee == 0%}
+                    Free
+                    {% else %}
+                    {{delivery_fee}}
+                    {% endif %} 
+                </td>
+            </tr>
+            <tr style="width: 100px;">
+                <td colspan="2" style="width: 100px;"><h5>Total Amount</h5></td>
+                <td><h5>{{ grand_total}}</h5></td>
+            </tr>
+        </table>
+        <h1>Select payment method</h1>
+        <input type="radio" name="" id="">
+        <img src="" alt="" height="100px" width="100px">
+        <input type="radio" name="" id="">
+        <img src="" alt="" height="100px" width="100px">
+
+
+    </div>
+</div>
+
+	
+
+{% endblock%}
